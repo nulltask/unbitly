@@ -59,7 +59,7 @@ function extract(url, stack, callback) {
     method: 'HEAD',
     headers: {
       'host': parsed.hostname,
-      'user-agent': exports.userAgent,
+      'user-agent': extract.userAgent,
       'accept': '*/*',
       'accept-encoding': 'gzip,deflate'
     }
@@ -73,7 +73,7 @@ function extract(url, stack, callback) {
     if (location) {
       debug('[%s] redirect detected: %s -> %s', stack.length, url, location);
       stack.push(location);
-      if (stack.length >= exports.maxDepth) {
+      if (stack.length >= extract.maxDepth) {
         return callback(null, null, stack);
       }
       return extract(location, stack, callback); // recursive
@@ -94,10 +94,10 @@ function extract(url, stack, callback) {
  * Max redirection depth.
  */
 
-exports.maxDepth = 10;
+extract.maxDepth = 10;
 
 /**
  * User agent.
  */
 
-exports.userAgent = 'unbitly ' + pkg.version;
+extract.userAgent = 'unbitly/' + pkg.version;
