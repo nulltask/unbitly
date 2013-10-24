@@ -8,6 +8,7 @@ var pkg = require('./package');
 var http = require('http');
 var https = require('https');
 var parse = require('url').parse;
+var resolve = require('url').resolve;
 
 /**
  * Supported protocol regex.
@@ -71,6 +72,7 @@ function extract(url, stack, callback) {
     req.abort();
 
     if (location) {
+      location = resolve(url, location);
       debug('[%s] redirect detected: %s -> %s', stack.length, url, location);
       stack.push(location);
       if (stack.length >= extract.maxDepth) {
