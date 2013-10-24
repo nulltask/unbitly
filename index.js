@@ -50,9 +50,9 @@ function extract(url, stack, callback) {
 
   var options = {
     hostname: parsed.hostname,
-    port: parsed.port || 'https:' === parsed.protocol
+    port: parsed.port || ('https:' === parsed.protocol
       ? 443
-      : 80,
+      : 80),
     path: parsed.path,
     method: 'HEAD',
     headers: {
