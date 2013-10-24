@@ -45,7 +45,7 @@ function extract(url, stack, callback) {
   var parsed = parse(url);
 
   if (!supportedRegex.test(parsed.protocol)) {
-    return callback(new Error('Unsupported protocol.'), stack[stack.length - 1], stack);
+    return callback(new Error('Unsupported protocol.'), null, stack);
   }
 
   var options = {
@@ -68,16 +68,16 @@ function extract(url, stack, callback) {
     if (location) {
       stack.push(location);
       if (stack.length > exports.maxDepth) {
-        return callback(null, stack[stack.length - 1], stack);
+        return callback(null, null, stack);
       }
       return extract(location, stack, callback); // recursive
     }
 
-    callback(null, stack[stack.length - 1], stack);
+    callback(null, url, stack);
   });
 
   req.once('error', function(err) {
-    callback(err, stack[stack.length - 1], stack);
+    callback(err, null, stack);
   });
 
   req.end();
