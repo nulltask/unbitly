@@ -76,8 +76,8 @@ function extract(url, stack, callback) {
     callback(null, stack[stack.length - 1], stack);
   });
 
-  req.once('error', function(e) {
-    callback(e, stack[stack.length - 1], stack);
+  req.once('error', function(err) {
+    callback(err, stack[stack.length - 1], stack);
   });
 
   req.end();
