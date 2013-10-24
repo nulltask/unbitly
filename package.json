@@ -2,7 +2,11 @@
   "name": "unbitly",
   "version": "0.0.1",
   "description": "Shortened URL extractor",
-  "keywords": ["url", "shortener", "extract"],
+  "keywords": [
+    "url",
+    "shortener",
+    "extract"
+  ],
   "author": "Seiya Konno <nulltask@gmail.com>",
   "repository": {
     "type": "git",
@@ -13,6 +17,7 @@
   },
   "devDependencies": {
     "mocha": "*",
-    "better-assert": "*"
+    "better-assert": "*",
+    "express": "~3.4.3"
   }
 }
