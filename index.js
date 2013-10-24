@@ -57,7 +57,7 @@ function extract(url, stack, callback) {
     method: 'HEAD',
     headers: {
       'host': parsed.hostname,
-      'user-agent': 'node',
+      'user-agent': exports.userAgent,
       'accept': '*/*',
       'accept-encoding': 'gzip,deflate'
     }
