@@ -17,6 +17,10 @@ app.get('/2', function(req, res) {
   res.redirect('http://' + req.get('Host') + ':' + app.get('port') + '/1');
 });
 
+app.get('/relative', function(req, res) {
+  res.redirect('/');
+});
+
 app.get('/loop', function(req, res) {
   res.redirect('http://' + req.get('Host') + ':' + app.get('port') + '/loop');
 });

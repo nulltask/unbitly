@@ -30,6 +30,15 @@ describe('unbitly', function() {
       });
     });
 
+    it('redirect (relative path)', function(done) {
+      extract(base + '/relative', function(err, url, stack) {
+        if (err) throw err;
+        assert(base + '/' === url);
+        assert(1 === stack.length);
+        done();
+      });
+    });
+
     it('redirect loop', function(done) {
       extract(base + '/loop', function(err, url, stack) {
         if (err) throw err;
