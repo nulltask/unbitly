@@ -6,6 +6,7 @@
 var debug = require('debug')('unbitly');
 var pkg = require('./package');
 var http = require('http');
+var https = require('https');
 var parse = require('url').parse;
 
 /**
@@ -48,11 +49,12 @@ function extract(url, stack, callback) {
     return callback(new Error('Unsupported protocol.'), null, stack);
   }
 
+  var secure = 'https:' === parsed.protocol;
+  var agent = secure ? https : http;
+
   var options = {
     hostname: parsed.hostname,
-    port: parsed.port || ('https:' === parsed.protocol
-      ? 443
-      : 80),
+    port: parsed.port || (secure ? 443 : 80),
     path: parsed.path,
     method: 'HEAD',
     headers: {
@@ -63,7 +65,7 @@ function extract(url, stack, callback) {
     }
   };
 
-  var req = http.request(options, function(res) {
+  var req = agent.request(options, function(res) {
     var location = res.headers.location;
 
     req.abort();
