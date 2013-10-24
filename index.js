@@ -65,6 +65,9 @@ function extract(url, stack, callback) {
 
   var req = http.request(options, function(res) {
     var location = res.headers.location;
+
+    req.abort();
+
     if (location) {
       debug('[%s] redirect detected: %s -> %s', stack.length, url, location);
       stack.push(location);
