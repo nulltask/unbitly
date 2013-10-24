@@ -68,7 +68,7 @@ function extract(url, stack, callback) {
     if (location) {
       debug('[%s] redirect detected: %s -> %s', stack.length, url, location);
       stack.push(location);
-      if (stack.length > exports.maxDepth) {
+      if (stack.length >= exports.maxDepth) {
         return callback(null, null, stack);
       }
       return extract(location, stack, callback); // recursive
