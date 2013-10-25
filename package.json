@@ -19,5 +19,6 @@
     "mocha": "*",
     "better-assert": "*",
     "express": "~3.4.3"
-  }
+  },
+  "license": "MIT"
 }
